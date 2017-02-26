@@ -7,7 +7,7 @@ let pool = MySQL.createPool({
 });
 
 pool.getConnection().then(connection => {
-    connection.query(`SHOW databases`)
+    connection.query(`CREATE DATABASE IF NOT EXISTS test`)
         .then(row => {
             console.log(row);
         })
