@@ -1,25 +1,16 @@
+require("dotenv").config();
+
 import * as Promise from "bluebird";
-import * as MySQL from "mysql2/promise";
+import { Log, DEBUG_LEVEL } from "./src/system/log";
+import * as db from "./src/system/mysql";
+
+let c = Log(DEBUG_LEVEL.sql, "SQL");
+
+c.log("Log");
+c.info("Info")
 
 
-let pool = MySQL.createPool({
-    user: "root"
-});
-
-pool.getConnection().then(connection => {
-    connection.query(`CREATE DATABASE IF NOT EXISTS test`)
-        .then(row => {
-            console.log(row);
-        })
-});
-
-console.log(pool);
-
-let resolve = (input: string): Promise<string> => {
-    return Promise.resolve()
-        .then(_ => {
-            return `${input}:done`;
-        })
-}
-
-export { resolve };
+Promise.using(db.getConnection(), connection => {
+        return db.query(connection, `SELECT * FROM currencies`)
+    })
+    .then(r => c.log(r));

@@ -5,12 +5,17 @@
   "main": "build/index.js",
   "dependencies": {
     "bluebird": "^3.4.7",
-    "mysql2": "^1.2.0"
+    "dotenv": "^4.0.0",
+    "mysql": "^2.13.0",
+    "mysql2": "^1.2.0",
+    "seedrandom": "^2.4.2"
   },
   "devDependencies": {
     "@types/bluebird": "^3.0.37",
     "@types/chai": "^3.4.35",
     "@types/mocha": "^2.2.39",
+    "@types/mysql": "0.0.31",
+    "@types/seedrandom": "^2.4.27",
     "chai": "^3.5.0",
     "jshint": "^2.9.4",
     "mocha": "^3.2.0",
@@ -18,7 +23,8 @@
     "typescript": "^2.2.1"
   },
   "scripts": {
-    "test": "tsc && mocha build/test/"
+    "test": "tsc && mocha build/test/",
+    "clean": "rm -rf build/*"
   },
   "keywords": [
     "mysql"
